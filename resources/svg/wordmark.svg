@@ -6,7 +6,7 @@
     Recoloreable por grupo: EVOLUTION usa currentColor (blanco en marca),
     VERTICAL en lima #C4F000. Escalable (viewBox, sin width/height fijos).
   -->
-  <g id="wm-evolution" transform="translate(82,285)" fill="currentColor">
+  <g id="wm-evolution" transform="translate(82,285)" fill="#0A0A0A">
     <g transform="translate(0.000000,795.000000) scale(0.100000,-0.100000)"
  stroke="none">
 <path d="M10540 7943 c-621 -37 -1074 -222 -1430 -582 -347 -351 -542 -819
@@ -67,7 +67,7 @@ c-388 811 -708 1476 -710 1478 -2 2 -4 -582 -4 -1300z"/>
 <path d="M15610 625 l0 -475 755 0 755 0 0 475 0 475 -755 0 -755 0 0 -475z"/>
 </g>
   </g>
-  <g id="wm-vertical" transform="translate(101,1219)" fill="#C4F000">
+  <g id="wm-vertical" transform="translate(101,1219)" fill="#0A0A0A">
     <g transform="translate(0.000000,292.000000) scale(0.100000,-0.100000)"
  stroke="none">
 <path d="M25849 2910 c-794 -29 -1348 -139 -1672 -331 -148 -88 -272 -238
