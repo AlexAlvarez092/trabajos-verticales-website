@@ -1,7 +1,9 @@
 # Guía de marca - Evolution Vertical
 
-> **Estado:** Hechos verificados a partir de los materiales gráficos en `./resources`.
-> Todo lo recogido aquí procede directamente de las imágenes aportadas por el cliente.
+> **Estado:** Documento mixto. Combina (a) hechos extraídos de los materiales gráficos
+> del cliente en `./resources`, (b) **decisiones de marca del proyecto** ya tomadas
+> (paleta canónica, tipografía) y (c) **assets vectoriales** ya producidos. Las secciones
+> con decisiones o supuestos están marcadas. Quedan puntos abiertos listados en §11.
 > Última actualización: 2026-10-10.
 
 ## 1. Identidad
@@ -16,12 +18,43 @@ El nombre se compone visualmente en dos líneas: **EVOLUTION** (blanco) sobre **
 
 ## 2. Logotipo
 
-- **Símbolo:** siluetas de edificios estilizados (rascacielos) junto a la figura de un operario descendiendo en rápel con arnés y casco.
-- **Variantes observadas en `./resources`:**
-  - Logo sobre fondo negro (horizontal).
-  - Versión circular con borde verde lima e iconos de servicios.
-  - Cabeceras tipo banner con fotografía de un técnico trabajando en altura.
-- **Fondo:** siempre oscuro/negro. El logo está diseñado para fondos oscuros.
+El logotipo es un **símbolo compuesto** (edificios + operario en rápel), sin wordmark.
+El nombre de la empresa se resuelve con tipografía en la web/materiales, no forma parte
+del logo.
+
+### 2.1 Logo compuesto — asset principal
+
+| Asset | Archivo | Estado |
+|-------|---------|--------|
+| **Logo compuesto** | `resources/svg/logo.svg` | ✅ Listo |
+
+Composición: el **edificio** (lima) a la izquierda y el **operario en rápel** (blanco) a su
+derecha, pegados, sobre la **loma curva** de la base. Posicionamiento definido por el cliente
+en Photopea y preservado exacto.
+
+Características técnicas:
+- **Paths inline** (no `<image>` ni base64) → ligero y editable.
+- **Recoloreable con CSS** mediante `fill="currentColor"`. Ejemplo: `color: #C4F000`.
+- **Escalable** sin pérdida: usa `viewBox` sin `width`/`height` fijos.
+- Incluye `<title>` para accesibilidad. XML validado.
+- Edificio y operario en `<g>` separados → se pueden colorear independientemente.
+
+### 2.2 Componentes sueltos
+
+Los dos elementos del logo también están disponibles por separado:
+
+| Asset | Archivo | Origen |
+|-------|---------|--------|
+| Edificios | `resources/svg/edificio.svg` | Vectorizado (potrace) del logo real del cliente |
+| Operario en rápel | `resources/svg/operario.svg` | Vectorizado (potrace) de la silueta editada por el cliente |
+
+Mismas características: monocromos, `currentColor`, escalables, accesibles.
+
+### 2.3 Fondo
+
+El logo está diseñado para **fondos oscuros/negros**. Sobre fondo claro, al ser
+`currentColor` se puede usar en negro/gris oscuro (nunca el lima como relleno sobre
+blanco — ver §3.4).
 
 ## 3. Paleta de color
 
@@ -158,15 +191,69 @@ Otras piezas resumen la oferta como: reparaciones de fachadas, impermeabilizaci�
 
 ## 9. Assets disponibles
 
-Ubicados en `./resources/`:
+### 9.1 Materiales originales del cliente (`./resources/`)
 
-| Archivo                                      | Contenido                                              |
-| -------------------------------------------- | ------------------------------------------------------ |
-| `44847442-06E6-4761-AC3C-AA3E2AB7C05A.png`   | Banner con logo + foto de técnico + contacto + valores |
-| `5ABE1C52-93C3-402F-893E-0B4EBD79960D.png`   | Banner alternativo con foto de técnico y skyline       |
-| `9790AB64-2771-4BAD-B20E-F2298BC239D8.png`   | Logo sobre fondo negro + contacto                      |
-| `9790AB64-2771-4BAD-B20E-F2298BC239D8-1.png` | Duplicado del anterior                                 |
-| `71837CD2-3F94-44D2-8228-EB4C559BF3A9.png`   | Logo circular con iconos de servicios y WhatsApp       |
-| `FCAFB9C5-E8AA-4001-AEFB-3959AC4E8913.png`   | Pieza "NUESTROS SERVICIOS" con listado completo        |
+| Archivo | Contenido |
+| --- | --- |
+| `44847442-06E6-4761-AC3C-AA3E2AB7C05A.png` | Banner con logo + foto de técnico + contacto + valores |
+| `5ABE1C52-93C3-402F-893E-0B4EBD79960D.png` | Banner alternativo con foto de técnico y skyline |
+| `9790AB64-2771-4BAD-B20E-F2298BC239D8.png` | Logo sobre fondo negro + contacto |
+| `9790AB64-2771-4BAD-B20E-F2298BC239D8-1.png` | Duplicado del anterior |
+| `71837CD2-3F94-44D2-8228-EB4C559BF3A9.png` | Logo circular con iconos de servicios y WhatsApp |
+| `FCAFB9C5-E8AA-4001-AEFB-3959AC4E8913.png` | Pieza "NUESTROS SERVICIOS" con listado completo |
+| `AdobeStock_1974586497.ai` | Ilustración de operario en rápel (Adobe Stock, prueba) |
 
-> No disponemos de los logos en formato vectorial (SVG/AI) ni de las fotografías originales en alta sin texto superpuesto. **Pendiente de solicitar al cliente.**
+> Las imágenes `.png` con nombre de hash fueron **generadas por IA** por el cliente; se usan
+> solo como referencia de concepto, no como fuente canónica (de ahí la deriva de color, §3).
+
+### 9.2 Assets vectoriales producidos (`./resources/svg/`)
+
+| Archivo | Contenido | Estado |
+| --- | --- | --- |
+| `logo.svg` | Logo compuesto: edificio + operario en rápel, recoloreable | ✅ Listo |
+| `edificio.svg` | Símbolo de edificios (componente suelto), monocromo recoloreable | ✅ Listo |
+| `operario.svg` | Operario en rápel (componente suelto), monocromo recoloreable | ✅ Listo |
+
+### 9.3 Pendiente de obtener
+
+- Fotografías originales del cliente en alta, sin texto superpuesto.
+
+## 10. Iconografía
+
+Los servicios y valores se representan con **iconos** (estilo observado en las piezas:
+pictogramas sólidos en lima sobre negro, dentro de círculo o sueltos).
+
+> **Pendiente de decidir:** set de iconos a usar en la web (p. ej. una librería open source
+> coherente con el estilo, o iconos a medida). Afecta a §7 (servicios) y a los valores (§6).
+
+## 11. Qué falta para completar este documento
+
+Estado de cada bloque y lo que queda por cerrar:
+
+| Sección | Estado | Pendiente |
+|---------|--------|-----------|
+| 1. Identidad | ✅ Completo | — |
+| 2. Logotipo | ✅ Completo | Logo compuesto (edificio + operario) terminado y recoloreable. |
+| 3. Color | ✅ Completo | — (paleta canónica fijada y verificada WCAG). |
+| 4. Tipografía | 🟡 Casi | Confirmar **pesos exactos** a autoalojar y añadir los archivos de fuente al repo. |
+| 5. Tono visual | ✅ Completo | — |
+| 6. Valores | ✅ Completo | — |
+| 7. Servicios | ✅ Completo | — |
+| 8. Contacto | 🟡 Casi | **Confirmar con el cliente** que WhatsApp está activo en el 614 347 313. |
+| 9. Assets | 🟡 Casi | Falta solo fotos reales en alta del cliente. |
+| 10. Iconografía | 🔴 Abierto | Elegir set de iconos. |
+
+### Preguntas abiertas específicas de marca (para el cliente)
+
+1. ¿Existe un **manual de marca** o valores de color oficiales previos? (Confirmaría o
+   corregiría el lima canónico `#C4F000`.)
+2. ¿Hay **logo en vectorial original** (AI/SVG/EPS) de quien le hizo la imagen gráfica?
+3. ¿El descriptor oficial es "Trabajos Verticales" a secas o "…· Multiservicios"?
+4. ¿WhatsApp activo en el número de contacto?
+5. ¿Fotografías reales de trabajos y del equipo, en alta resolución?
+6. ¿Logo pensado para usarse **solo sobre negro**, o también necesitará versión sobre
+   fondo claro? (Determina si producimos variante monocroma en negro.)
+
+> Cuando se resuelvan estas preguntas, el documento quedará cerrado. Las decisiones de
+> implementación (stack, iconos) que excedan la marca se registrarán como ADR en
+> `docs/decisions/`.
