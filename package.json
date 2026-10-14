@@ -1,0 +1,22 @@
+{
+  "name": "trabajos-verticales-website",
+  "version": "1.0.0",
+  "description": "Website for Evolution Vertical (vertical works / rope access).",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexAlvarez092/trabajos-verticales-website.git"
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource/montserrat": "^5.3.0",
+    "astro": "^7.3.8"
+  }
+}

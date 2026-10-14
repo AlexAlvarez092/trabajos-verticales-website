@@ -1,0 +1,102 @@
+---
+import '@fontsource/montserrat/400.css';
+import '@fontsource/montserrat/500.css';
+import '@fontsource/montserrat/600.css';
+import '@fontsource/montserrat/700.css';
+import '@fontsource/montserrat/800.css';
+import '../styles/global.css';
+import { getTranslations, locales, withBase, type Locale } from '../i18n';
+import { company } from '../i18n/company';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getTranslations(locale);
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const origin = `${siteUrl}${base}`;
+const canonical = `${origin}/${locale}/`;
+const ogImage = `${origin}/assets/logo.svg`;
+
+// Cloudflare Web Analytics (cookie-less). Set PUBLIC_CF_BEACON_TOKEN to enable.
+const cfToken = import.meta.env.PUBLIC_CF_BEACON_TOKEN;
+
+// hreflang alternates for every locale + x-default
+const alternates = locales.map((l) => ({ lang: l, href: `${origin}/${l}/` }));
+
+// LocalBusiness structured data (NAP). Address pending from client.
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: company.name,
+  description: t.meta.description,
+  telephone: company.phoneIntl,
+  email: company.email,
+  url: canonical,
+  areaServed: 'Comunidad Valenciana',
+  image: ogImage,
+};
+---
+
+<!doctype html>
+<html lang={t.htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0e0e10" />
+    <link rel="icon" type="image/svg+xml" href={withBase('/assets/building.svg')} />
+
+    <title>{t.meta.title}</title>
+    <meta name="description" content={t.meta.description} />
+    <link rel="canonical" href={canonical} />
+
+    {alternates.map((a) => (
+      <link rel="alternate" hreflang={a.lang} href={a.href} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={`${origin}/es/`} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={company.name} />
+    <meta property="og:title" content={t.meta.title} />
+    <meta property="og:description" content={t.meta.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content={t.htmlLang} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{t.nav.skip}</a>
+    <slot />
+    {cfToken && (
+      <script
+        defer
+        src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon={`{"token": "${cfToken}"}`}
+      />
+    )}
+  </body>
+</html>
+
+<style>
+  .skip-link {
+    position: absolute;
+    left: 0.5rem;
+    top: -3rem;
+    background: var(--color-lime);
+    color: var(--color-black);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    font-weight: var(--fw-semibold);
+    z-index: 1000;
+    transition: top 0.2s ease;
+  }
+  .skip-link:focus {
+    top: 0.5rem;
+  }
+</style>

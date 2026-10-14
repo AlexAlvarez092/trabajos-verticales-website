@@ -1,0 +1,192 @@
+---
+import { getTranslations, locales, withBase, type Locale } from '../i18n';
+import { company } from '../i18n/company';
+import Logo from './Logo.astro';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = getTranslations(locale);
+---
+
+<header class="header">
+  <div class="container header__inner">
+    <a class="header__logo" href={withBase(`/${locale}/`)} aria-label={company.name}>
+      <Logo class="header__logo-svg" title={company.name} />
+    </a>
+
+    <button
+      class="header__toggle"
+      aria-expanded="false"
+      aria-controls="primary-nav"
+      aria-label={t.nav.services}
+      data-nav-toggle
+    >
+      <span class="header__bars" aria-hidden="true"></span>
+    </button>
+
+    <nav class="header__nav" id="primary-nav" aria-label="Principal" data-nav>
+      <ul class="header__links">
+        <li><a href="#services" data-nav-link>{t.nav.services}</a></li>
+        <li><a href="#about" data-nav-link>{t.nav.about}</a></li>
+        <li><a href="#area" data-nav-link>{t.nav.area}</a></li>
+        <li><a href="#contact" data-nav-link>{t.nav.contact}</a></li>
+      </ul>
+      <div class="header__langs" aria-label="Idioma">
+        {locales.map((l) => (
+          <a
+            href={withBase(`/${l}/`)}
+            class={`header__lang ${l === locale ? 'is-active' : ''}`}
+            hreflang={l}
+            lang={l}
+            aria-current={l === locale ? 'true' : undefined}
+          >{l.toUpperCase()}</a>
+        ))}
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector('[data-nav-toggle]');
+  const nav = document.querySelector('[data-nav]');
+  if (toggle && nav) {
+    const close = () => {
+      nav.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+    };
+    toggle.addEventListener('click', () => {
+      const open = nav.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', String(open));
+    });
+    nav.querySelectorAll('[data-nav-link]').forEach((link) =>
+      link.addEventListener('click', close)
+    );
+  }
+</script>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: color-mix(in srgb, var(--color-black) 92%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--color-gray);
+  }
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 4.5rem;
+  }
+  .header__logo {
+    color: var(--color-lime);
+    display: inline-flex;
+    align-items: center;
+    width: 4.5rem;
+    height: 2.6rem;
+  }
+  .header__logo-svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .header__logo-svg :global(svg) {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .header__nav {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+  }
+  .header__links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    font-weight: var(--fw-semibold);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.03em;
+  }
+  .header__links a:hover {
+    color: var(--color-lime);
+  }
+  .header__langs {
+    display: flex;
+    gap: 0.25rem;
+    font-size: 0.8rem;
+    font-weight: var(--fw-semibold);
+  }
+  .header__lang {
+    padding: 0.25rem 0.45rem;
+    border-radius: 6px;
+    opacity: 0.6;
+  }
+  .header__lang.is-active {
+    color: var(--color-lime);
+    opacity: 1;
+  }
+  .header__lang:hover {
+    opacity: 1;
+  }
+
+  /* Hamburger button (hidden on desktop) */
+  .header__toggle {
+    display: none;
+    background: none;
+    border: 0;
+    width: 2.75rem;
+    height: 2.75rem;
+    cursor: pointer;
+    color: var(--color-white);
+  }
+  .header__bars,
+  .header__bars::before,
+  .header__bars::after {
+    content: '';
+    display: block;
+    width: 1.6rem;
+    height: 2px;
+    background: currentColor;
+    transition: transform 0.2s ease;
+  }
+  .header__bars {
+    position: relative;
+    margin-inline: auto;
+  }
+  .header__bars::before { position: absolute; top: -6px; left: 0; }
+  .header__bars::after { position: absolute; top: 6px; left: 0; }
+
+  @media (max-width: 760px) {
+    .header__toggle {
+      display: block;
+    }
+    .header__nav {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.25rem;
+      padding: 1.5rem clamp(1rem, 5vw, 2.5rem);
+      background: var(--color-black);
+      border-bottom: 1px solid var(--color-gray);
+      transform: translateY(-150%);
+      transition: transform 0.25s ease;
+    }
+    .header__nav.is-open {
+      transform: translateY(0);
+    }
+    .header__links {
+      flex-direction: column;
+      gap: 1rem;
+      font-size: 1.1rem;
+    }
+  }
+</style>

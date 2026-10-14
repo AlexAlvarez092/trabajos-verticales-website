@@ -1,0 +1,58 @@
+---
+import { getTranslations, type Locale } from '../i18n';
+import { company } from '../i18n/company';
+import Logo from './Logo.astro';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = getTranslations(locale);
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <Logo class="footer__logo" title={company.name} />
+    <ul class="footer__contact">
+      <li><a href={`tel:${company.phoneIntl}`}>{company.phone}</a></li>
+      <li><a href={`mailto:${company.email}`}>{company.email}</a></li>
+    </ul>
+    <p class="footer__legal">© {year} {company.name}. {t.footer.rights}</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--color-gray);
+    padding-block: 2.5rem;
+  }
+  .footer__inner {
+    display: grid;
+    gap: 1.25rem;
+    justify-items: center;
+    text-align: center;
+  }
+  .footer__logo {
+    color: var(--color-lime);
+    display: inline-flex;
+  }
+  .footer__logo :global(svg) {
+    height: 3.2rem;
+    width: 5.5rem;
+    display: block;
+  }
+  .footer__contact {
+    list-style: none;
+    display: grid;
+    gap: 0.35rem;
+    font-weight: var(--fw-medium);
+  }
+  .footer__contact a:hover {
+    color: var(--color-lime);
+  }
+  .footer__legal {
+    font-size: 0.85rem;
+    color: color-mix(in srgb, var(--color-white) 65%, transparent);
+  }
+</style>

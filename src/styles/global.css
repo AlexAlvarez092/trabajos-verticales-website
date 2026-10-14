@@ -1,0 +1,179 @@
+/* ===========================================================================
+   Evolution Vertical — global styles
+   Brand tokens from docs/brand-identity.md
+   =========================================================================== */
+
+:root {
+  /* Colors */
+  --color-black: #0e0e10;
+  --color-white: #f5f5f2;
+  --color-lime: #b4d73a;
+  --color-lime-dark: #8fae2b;
+  --color-gray: #2a2c30;
+
+  /* Typography (Montserrat) */
+  --font-base: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-extrabold: 800;
+
+  /* Layout */
+  --container-max: 1200px;
+  --space-section: clamp(3.5rem, 8vw, 7rem);
+  --radius: 10px;
+}
+
+/* ---- Reset ---------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* offset so anchored sections aren't hidden under the fixed header */
+  scroll-padding-top: 5rem;
+}
+
+body {
+  font-family: var(--font-base);
+  font-weight: var(--fw-regular);
+  color: var(--color-white);
+  background-color: var(--color-black);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ---- Typography ----------------------------------------------------------- */
+h1,
+h2,
+h3,
+h4 {
+  font-weight: var(--fw-bold);
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+h1 {
+  font-weight: var(--fw-extrabold);
+  font-size: clamp(2.2rem, 6vw, 4rem);
+}
+
+h2 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+}
+
+h3 {
+  font-weight: var(--fw-semibold);
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+}
+
+p {
+  max-width: 65ch;
+}
+
+strong,
+.accent {
+  color: var(--color-lime);
+}
+
+/* ---- Layout helpers ------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 5vw, 2.5rem);
+}
+
+.section {
+  padding-block: var(--space-section);
+}
+
+.section--alt {
+  background-color: var(--color-gray);
+}
+
+/* ---- Buttons -------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.6rem;
+  border-radius: var(--radius);
+  font-weight: var(--fw-semibold);
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* Lime button -> black text (readable contrast) */
+.btn--primary {
+  background-color: var(--color-lime);
+  color: var(--color-black);
+}
+
+.btn--primary:hover {
+  background-color: var(--color-lime-dark);
+}
+
+.btn--outline {
+  border: 2px solid var(--color-lime);
+  color: var(--color-lime);
+}
+
+.btn--outline:hover {
+  background-color: var(--color-lime);
+  color: var(--color-black);
+}
+
+/* ---- Accessibility -------------------------------------------------------- */
+:focus-visible {
+  outline: 3px solid var(--color-lime);
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

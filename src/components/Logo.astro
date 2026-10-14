@@ -1,0 +1,12 @@
+---
+// Inlines logo.svg so it inherits `color` via currentColor (an <img> would not).
+import logo from '../../assets/logo.svg?raw';
+
+interface Props {
+  class?: string;
+  title?: string;
+}
+const { class: className, title } = Astro.props;
+// Strip the hardcoded width/height-less root is fine; keep as-is. Remove XML title dup if needed.
+---
+<span class={className} set:html={logo} role="img" aria-label={title} />

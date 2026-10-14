@@ -1,0 +1,101 @@
+---
+import { getTranslations, type Locale } from '../i18n';
+import { serviceKeys } from '../i18n/company';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = getTranslations(locale);
+
+// Minimal inline icons (stroke uses currentColor).
+const icons: Record<string, string> = {
+  facades: '<path d="M4 21V7l6-3v17M10 21V9l10-4v16M4 21h18M8 11v2M8 16v2M14 11v2M14 16v2M14 7v1"/>',
+  painting: '<path d="M3 7h13v5H3zM16 9h3a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-6M11 14v3a2 2 0 0 1-2 2H8v3"/>',
+  waterproofing: '<path d="M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11z"/>',
+  concrete: '<path d="M3 6h18v12H3zM3 10h18M3 14h18M9 6v4M15 10v4M9 14v4"/>',
+  damp: '<path d="M12 2v6M12 22v-4M4.9 4.9l3 3M16 16l3 3M2 12h6M22 12h-4M4.9 19.1l3-3M16 8l3-3"/>',
+  ac: '<path d="M3 6h18v6H3zM6 15v3M12 15v4M18 15v3M6 9h.01M10 9h4"/>',
+  courtyards: '<path d="M4 4h16v16H4zM12 4v16M4 12h16"/>',
+  roofs: '<path d="M3 11l9-7 9 7M5 10v10h14V10M10 20v-6h4v6"/>',
+  masonry: '<path d="M14 7l-1.5-1.5a2 2 0 0 0-3 0L4 11a2 2 0 0 0 0 3L8 18M14 7l6 6a2 2 0 0 1-3 3M14 7l3 3"/>',
+  antibird: '<path d="M4 4h16v16H4zM4 9h16M4 14h16M9 4v16M14 4v16"/>',
+  cleaning: '<path d="M19 3l-7 7M14 5l5 5M5 14l5 5-3 3H4v-3zM9 15l6-6"/>',
+};
+---
+
+<section id="services" class="section section--alt">
+  <div class="container">
+    <h2>{t.services.title}</h2>
+    <p class="services__intro">{t.services.intro}</p>
+
+    <ul class="services__grid">
+      {serviceKeys.map((key) => (
+        <li class="service">
+          <span class="service__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" set:html={icons[key]} />
+          </span>
+          <div>
+            <h3 class="service__name">{t.services.items[key].name}</h3>
+            <p class="service__desc">{t.services.items[key].desc}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .services__intro {
+    margin-top: 0.5rem;
+    margin-bottom: 2.5rem;
+    color: color-mix(in srgb, var(--color-white) 80%, transparent);
+  }
+  .services__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    list-style: none;
+  }
+  .service {
+    display: flex;
+    gap: 1rem;
+    padding: 1.25rem;
+    background: color-mix(in srgb, var(--color-black) 60%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-lime) 15%, transparent);
+    border-radius: var(--radius);
+  }
+  .service__icon {
+    flex: none;
+    width: 2.75rem;
+    height: 2.75rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--color-lime);
+    color: var(--color-black);
+  }
+  .service__icon svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .service__name {
+    font-size: 1.05rem;
+    margin-bottom: 0.25rem;
+  }
+  .service__desc {
+    color: color-mix(in srgb, var(--color-white) 75%, transparent);
+    font-size: 0.95rem;
+  }
+
+  @media (min-width: 640px) {
+    .services__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1000px) {
+    .services__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,83 @@
+---
+import { getTranslations, type Locale } from '../i18n';
+import { company } from '../i18n/company';
+import Logo from './Logo.astro';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = getTranslations(locale);
+const waText = encodeURIComponent(t.contact.whatsappText);
+---
+
+<section class="hero">
+  <div class="container hero__inner">
+    <div class="hero__content">
+      <p class="hero__tagline">{t.hero.tagline}</p>
+      <h1 class="hero__title">{t.hero.title}</h1>
+      <p class="hero__subtitle">{t.hero.subtitle}</p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href={`tel:${company.phoneIntl}`}>
+          {t.hero.ctaPrimary}
+        </a>
+        <a
+          class="btn btn--outline"
+          href={`https://wa.me/${company.whatsappNumber}?text=${waText}`}
+          target="_blank"
+          rel="noopener"
+        >{t.hero.ctaSecondary}</a>
+      </div>
+    </div>
+    <div class="hero__art" aria-hidden="true">
+      <Logo class="hero__logo" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-block: clamp(3rem, 8vw, 6rem);
+    border-bottom: 1px solid var(--color-gray);
+  }
+  .hero__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    align-items: center;
+  }
+  .hero__tagline {
+    color: var(--color-lime);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: var(--fw-semibold);
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+  }
+  .hero__subtitle {
+    margin-top: 1rem;
+    font-size: 1.15rem;
+    color: color-mix(in srgb, var(--color-white) 85%, transparent);
+  }
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .hero__art {
+    color: var(--color-lime);
+  }
+  .hero__logo :global(svg) {
+    width: 100%;
+    max-width: 560px;
+    height: auto;
+    margin-inline: auto;
+  }
+
+  @media (min-width: 900px) {
+    .hero__inner {
+      grid-template-columns: 1.1fr 0.9fr;
+    }
+  }
+</style>

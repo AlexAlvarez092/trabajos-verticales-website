@@ -1,0 +1,86 @@
+---
+import { getTranslations, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = getTranslations(locale);
+const valueKeys = ['safety', 'commitment', 'efficiency'] as const;
+const valueIcons: Record<string, string> = {
+  safety: '<path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/>',
+  commitment: '<path d="M7 11V7a5 5 0 0 1 10 0v4M5 11h14l-1 9H6z"/>',
+  efficiency: '<path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M19 5l-3 3M8 16l-3 3"/><circle cx="12" cy="12" r="3"/>',
+};
+---
+
+<section id="about" class="section">
+  <div class="container about__inner">
+    <div>
+      <h2>{t.about.title}</h2>
+      <p class="about__intro">{t.about.intro}</p>
+    </div>
+    <ul class="about__values">
+      {valueKeys.map((key) => (
+        <li class="value">
+          <span class="value__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" set:html={valueIcons[key]} />
+          </span>
+          <h3 class="value__name">{t.about.values[key].name}</h3>
+          <p class="value__desc">{t.about.values[key].desc}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .about__inner {
+    display: grid;
+    gap: 2.5rem;
+  }
+  .about__intro {
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    color: color-mix(in srgb, var(--color-white) 85%, transparent);
+  }
+  .about__values {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    list-style: none;
+  }
+  .value__icon {
+    display: inline-grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: 2px solid var(--color-lime);
+    color: var(--color-lime);
+    margin-bottom: 0.75rem;
+  }
+  .value__icon svg {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+  .value__name {
+    margin-bottom: 0.35rem;
+  }
+  .value__desc {
+    color: color-mix(in srgb, var(--color-white) 75%, transparent);
+    font-size: 0.95rem;
+  }
+
+  @media (min-width: 720px) {
+    .about__values {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media (min-width: 1000px) {
+    .about__inner {
+      grid-template-columns: 1fr 1.3fr;
+      align-items: center;
+    }
+  }
+</style>

@@ -1,0 +1,43 @@
+---
+import { getTranslations, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = getTranslations(locale);
+---
+
+<section id="area" class="section section--alt">
+  <div class="container area__inner">
+    <span class="area__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z" />
+        <circle cx="12" cy="9" r="2.5" />
+      </svg>
+    </span>
+    <h2>{t.area.title}</h2>
+    <p class="area__text">{t.area.text}</p>
+  </div>
+</section>
+
+<style>
+  .area__inner {
+    text-align: center;
+    display: grid;
+    justify-items: center;
+    gap: 1rem;
+  }
+  .area__icon {
+    color: var(--color-lime);
+  }
+  .area__icon svg {
+    width: 3rem;
+    height: 3rem;
+  }
+  .area__text {
+    max-width: 50ch;
+    font-size: 1.1rem;
+    color: color-mix(in srgb, var(--color-white) 85%, transparent);
+  }
+</style>

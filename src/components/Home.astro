@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from './Header.astro';
+import Hero from './Hero.astro';
+import Services from './Services.astro';
+import About from './About.astro';
+import Area from './Area.astro';
+import Contact from './Contact.astro';
+import Footer from './Footer.astro';
+import WhatsAppFloat from './WhatsAppFloat.astro';
+import type { Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+---
+
+<Layout locale={locale}>
+  <Header locale={locale} />
+  <main id="main">
+    <Hero locale={locale} />
+    <Services locale={locale} />
+    <About locale={locale} />
+    <Area locale={locale} />
+    <Contact locale={locale} />
+  </main>
+  <Footer locale={locale} />
+  <WhatsAppFloat locale={locale} />
+</Layout>
