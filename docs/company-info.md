@@ -61,6 +61,7 @@ expands these summaries into brief technical descriptions in Spanish, Valencian
 and English. Company presentation and documentation remain within the existing
 About section; no additional navigation sections are needed.
 
-Real project photographs are pending from the client. Until supplied, service
-cards retain their icons without stock images or empty placeholders. See
+Nine real project photographs supplied by the client appear in a carousel directly
+above Services. Service cards retain their icons until individual service photos
+are assigned, without stock images or empty placeholders. See
 [photo integration instructions](./technical-spec.md#service-photographs).

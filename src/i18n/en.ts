@@ -20,6 +20,22 @@ export const en = {
     ctaPrimary: 'Call us',
     ctaSecondary: 'WhatsApp',
   },
+  gallery: {
+    title: 'Our work',
+    previous: 'View previous photograph',
+    next: 'View next photograph',
+    photos: [
+      { key: 'image-1', alt: 'Rope access worker suspended beside a brick facade.' },
+      { key: 'image-2', alt: 'Rope access beside a white facade above a pedestrian street.' },
+      { key: 'image-3', alt: 'View from above of a rope access worker on a building facade.' },
+      { key: 'image-4', alt: 'Rope access work on the facade of a residential building.' },
+      { key: 'image-5', alt: 'Worker suspended on ropes in the internal courtyard of a building.' },
+      { key: 'image-6', alt: 'Worker wearing safety equipment on a metal roof beside an industrial building.' },
+      { key: 'image-7', alt: 'Close-up of a worker wearing a helmet and rope access equipment.' },
+      { key: 'image-8', alt: 'Worker wearing a helmet and harness beside balconies on a facade.' },
+      { key: 'image-9', alt: 'Work on an industrial building exterior from a metal roof.' },
+    ],
+  },
   services: {
     title: 'Our services',
     intro: 'Complete work-at-height solutions for residents’ associations, property managers and individuals.',

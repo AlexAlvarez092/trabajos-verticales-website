@@ -20,6 +20,22 @@ export const es = {
     ctaPrimary: 'Llámanos',
     ctaSecondary: 'WhatsApp',
   },
+  gallery: {
+    title: 'Nuestros trabajos',
+    previous: 'Ver fotografía anterior',
+    next: 'Ver fotografía siguiente',
+    photos: [
+      { key: 'image-1', alt: 'Operario suspendido mediante cuerdas junto a una fachada de ladrillo.' },
+      { key: 'image-2', alt: 'Acceso con cuerda junto a una fachada blanca sobre una calle peatonal.' },
+      { key: 'image-3', alt: 'Vista desde arriba de un operario trabajando con cuerdas en una fachada.' },
+      { key: 'image-4', alt: 'Trabajos verticales en la fachada de un edificio de viviendas.' },
+      { key: 'image-5', alt: 'Operario suspendido con cuerdas en el patio interior de un edificio.' },
+      { key: 'image-6', alt: 'Operario con equipo de seguridad sobre una cubierta metálica junto a una nave.' },
+      { key: 'image-7', alt: 'Detalle de un operario con casco y equipo de acceso por cuerda.' },
+      { key: 'image-8', alt: 'Operario con casco y arnés junto a los balcones de una fachada.' },
+      { key: 'image-9', alt: 'Intervención en el cerramiento de una nave desde una cubierta metálica.' },
+    ],
+  },
   services: {
     title: 'Nuestros servicios',
     intro: 'Soluciones integrales en altura para comunidades, administradores y particulares.',

@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Header from './Header.astro';
 import Hero from './Hero.astro';
 import Services from './Services.astro';
+import WorkGallery from './WorkGallery.astro';
 import About from './About.astro';
 import Area from './Area.astro';
 import Contact from './Contact.astro';
@@ -20,6 +21,7 @@ const { locale } = Astro.props;
   <Header locale={locale} />
   <main id="main">
     <Hero locale={locale} />
+    <WorkGallery locale={locale} />
     <Services locale={locale} />
     <About locale={locale} />
     <Area locale={locale} />

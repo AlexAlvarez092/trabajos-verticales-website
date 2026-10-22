@@ -20,6 +20,22 @@ export const va = {
     ctaPrimary: 'Truca’ns',
     ctaSecondary: 'WhatsApp',
   },
+  gallery: {
+    title: 'Els nostres treballs',
+    previous: 'Veure la fotografia anterior',
+    next: 'Veure la fotografia següent',
+    photos: [
+      { key: 'image-1', alt: 'Operari suspés mitjançant cordes al costat d’una façana de rajola.' },
+      { key: 'image-2', alt: 'Accés amb corda al costat d’una façana blanca sobre un carrer de vianants.' },
+      { key: 'image-3', alt: 'Vista des de dalt d’un operari treballant amb cordes en una façana.' },
+      { key: 'image-4', alt: 'Treballs verticals en la façana d’un edifici d’habitatges.' },
+      { key: 'image-5', alt: 'Operari suspés amb cordes en el pati interior d’un edifici.' },
+      { key: 'image-6', alt: 'Operari amb equip de seguretat sobre una coberta metàl·lica al costat d’una nau.' },
+      { key: 'image-7', alt: 'Detall d’un operari amb casc i equip d’accés amb corda.' },
+      { key: 'image-8', alt: 'Operari amb casc i arnès al costat dels balcons d’una façana.' },
+      { key: 'image-9', alt: 'Intervenció en el tancament d’una nau des d’una coberta metàl·lica.' },
+    ],
+  },
   services: {
     title: 'Els nostres serveis',
     intro: 'Solucions integrals en altura per a comunitats, administradors i particulars.',

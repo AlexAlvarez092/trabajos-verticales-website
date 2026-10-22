@@ -54,6 +54,25 @@ Based on services and location (Valencian Community):
 Spanish, Valencian, and English. Language-prefixed routes (`/es/`, `/va/`, `/en/`) with
 correct `hreflang` tags.
 
+## Work gallery
+
+The nine client photographs in `assets/pictures/` are WebP files, resized without
+upscaling to a maximum 1600px on either side at quality 78. Orientation is applied
+before conversion and metadata is stripped, including EXIF, GPS, XMP, IPTC and ICC.
+The processed WebP files replace the supplied JPEGs.
+
+`WorkGallery.astro` imports these files in numeric filename order and displays them
+immediately above Services. Astro generates responsive 320px, 640px and 960px WebP
+variants; images load lazily with explicit dimensions to avoid layout shifts.
+Photographs are contained rather than cropped.
+
+The carousel uses native horizontal scrolling and CSS scroll snap, with touch,
+keyboard and previous/next controls. It does not autoplay, respects reduced motion,
+and remains scrollable without JavaScript. Labels and photo descriptions are
+localized in all three languages. When adding a photograph, optimize and strip it
+first, then add a matching filename key and accurate description to each locale's
+`gallery.photos` array; missing descriptions fail the build.
+
 ## Service photographs
 
 Add client-approved real photographs to `src/assets/services/` (create the directory
