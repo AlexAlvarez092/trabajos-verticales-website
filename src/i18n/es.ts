@@ -83,6 +83,7 @@ export const es = {
     call: 'Llamar',
     whatsapp: 'WhatsApp',
     email: 'Enviar email',
+    instagram: 'Síguenos en Instagram',
     whatsappText: 'Hola, me gustaría información sobre sus servicios de trabajos verticales.',
   },
   footer: {

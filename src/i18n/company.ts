@@ -5,6 +5,7 @@ export const company = {
   phone: '614 347 313',
   phoneIntl: '+34614347313', // for tel: and wa.me
   email: 'evolutiontejerina.oficial@gmail.com',
+  instagram: 'https://www.instagram.com/trabajos.verticales.evolution/',
   whatsappNumber: '34614347313', // wa.me/<number>
 };
 

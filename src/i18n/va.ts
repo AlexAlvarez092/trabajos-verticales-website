@@ -83,6 +83,7 @@ export const va = {
     call: 'Trucar',
     whatsapp: 'WhatsApp',
     email: 'Enviar email',
+    instagram: 'Segueix-nos a Instagram',
     whatsappText: 'Hola, m’agradaria informació sobre els seus serveis de treballs verticals.',
   },
   footer: {

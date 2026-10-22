@@ -83,6 +83,7 @@ export const en = {
     call: 'Call',
     whatsapp: 'WhatsApp',
     email: 'Send email',
+    instagram: 'Follow us on Instagram',
     whatsappText: 'Hello, I would like information about your rope access services.',
   },
   footer: {

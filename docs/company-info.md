@@ -30,6 +30,11 @@ invites visitors to enquire about documentation relevant to their project.
 |---------|-------|
 | Phone / WhatsApp | 614 347 313 |
 | Email | evolutiontejerina.oficial@gmail.com |
+| Instagram | https://www.instagram.com/trabajos.verticales.evolution/ |
+
+Instagram is linked from Contact and the footer in all three languages and included
+in the LocalBusiness structured data (`sameAs`). It is a regular external link,
+not an embedded feed, so no Instagram scripts are loaded on the website.
 
 ## Values
 
