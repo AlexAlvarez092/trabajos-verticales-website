@@ -17,7 +17,7 @@ export const localeNames: Record<Locale, string> = {
   en: 'English',
 };
 
-// Service icon keys map to inline SVG in the Services component.
+// Keys also identify service photo filenames and inline icons.
 export const serviceKeys = [
   'facades',
   'painting',
@@ -30,4 +30,9 @@ export const serviceKeys = [
   'masonry',
   'antibird',
   'cleaning',
+  'downpipes',
+  'sealing',
+  'maintenance',
 ] as const;
+
+export type ServiceKey = (typeof serviceKeys)[number];

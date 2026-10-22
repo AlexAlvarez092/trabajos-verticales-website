@@ -1,15 +1,25 @@
 ---
 import { getTranslations, type Locale } from '../i18n';
-import { serviceKeys } from '../i18n/company';
+import { serviceKeys, type ServiceKey } from '../i18n/company';
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 
 interface Props {
   locale: Locale;
 }
 const { locale } = Astro.props;
 const t = getTranslations(locale);
+const photos = import.meta.glob<ImageMetadata>(
+  '../assets/services/*.{jpg,jpeg,png,webp,avif}',
+  { eager: true, import: 'default' },
+);
+const services = serviceKeys.map((key) => ({
+  key,
+  photo: Object.entries(photos).find(([path]) => path.split('/').pop()?.split('.')[0] === key)?.[1],
+}));
 
 // Minimal inline icons (stroke uses currentColor).
-const icons: Record<string, string> = {
+const icons: Record<ServiceKey, string> = {
   facades: '<path d="M4 21V7l6-3v17M10 21V9l10-4v16M4 21h18M8 11v2M8 16v2M14 11v2M14 16v2M14 7v1"/>',
   painting: '<path d="M3 7h13v5H3zM16 9h3a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-6M11 14v3a2 2 0 0 1-2 2H8v3"/>',
   waterproofing: '<path d="M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11z"/>',
@@ -21,6 +31,9 @@ const icons: Record<string, string> = {
   masonry: '<path d="M14 7l-1.5-1.5a2 2 0 0 0-3 0L4 11a2 2 0 0 0 0 3L8 18M14 7l6 6a2 2 0 0 1-3 3M14 7l3 3"/>',
   antibird: '<path d="M4 4h16v16H4zM4 9h16M4 14h16M9 4v16M14 4v16"/>',
   cleaning: '<path d="M19 3l-7 7M14 5l5 5M5 14l5 5-3 3H4v-3zM9 15l6-6"/>',
+  downpipes: '<path d="M8 3v6a3 3 0 0 0 3 3h2a3 3 0 0 1 3 3v6M12 3v5h2a6 6 0 0 1 6 6v7M6 3h8M14 21h8"/>',
+  sealing: '<path d="M4 3h16v18H4zM12 3v18M4 12h16M8 8l8 8"/>',
+  maintenance: '<path d="M12 3v6M9 6h6M5 21l7-12 7 12M8 16h8"/><circle cx="12" cy="6" r="3"/>',
 };
 ---
 
@@ -30,14 +43,30 @@ const icons: Record<string, string> = {
     <p class="services__intro">{t.services.intro}</p>
 
     <ul class="services__grid">
-      {serviceKeys.map((key) => (
-        <li class="service">
-          <span class="service__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" set:html={icons[key]} />
-          </span>
-          <div>
-            <h3 class="service__name">{t.services.items[key].name}</h3>
-            <p class="service__desc">{t.services.items[key].desc}</p>
+      {services.map(({ key, photo }) => (
+        <li class:list={['service', { 'service--photo': photo }]}>
+          {photo && (
+            <Image
+              class="service__photo"
+              src={photo}
+              alt={t.services.items[key].name}
+              widths={[400, 800]}
+              sizes="(min-width: 1000px) 374px, (min-width: 640px) 50vw, 100vw"
+              width={800}
+              height={500}
+              fit="cover"
+              loading="lazy"
+              decoding="async"
+            />
+          )}
+          <div class="service__body">
+            <span class="service__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" set:html={icons[key]} />
+            </span>
+            <div>
+              <h3 class="service__name">{t.services.items[key].name}</h3>
+              <p class="service__desc">{t.services.items[key].desc}</p>
+            </div>
           </div>
         </li>
       ))}
@@ -58,12 +87,27 @@ const icons: Record<string, string> = {
     list-style: none;
   }
   .service {
-    display: flex;
-    gap: 1rem;
-    padding: 1.25rem;
+    overflow: hidden;
     background: color-mix(in srgb, var(--color-black) 60%, transparent);
     border: 1px solid color-mix(in srgb, var(--color-lime) 15%, transparent);
     border-radius: var(--radius);
+  }
+  .service__body {
+    display: flex;
+    gap: 1rem;
+    padding: 1.25rem;
+  }
+  .service__body > div {
+    min-width: 0;
+  }
+  .service__photo {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 8 / 5;
+    object-fit: cover;
+  }
+  .service--photo .service__icon {
+    display: none;
   }
   .service__icon {
     flex: none;
@@ -82,6 +126,7 @@ const icons: Record<string, string> = {
   .service__name {
     font-size: 1.05rem;
     margin-bottom: 0.25rem;
+    overflow-wrap: anywhere;
   }
   .service__desc {
     color: color-mix(in srgb, var(--color-white) 75%, transparent);
